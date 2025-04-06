@@ -3,6 +3,7 @@ import streamlit as st
 import json
 import os
 
+st.set_page_config(page_title="📚Library", layout='wide')
 file_name = "books.json"
 
 # to load data from json file
@@ -21,14 +22,14 @@ def save_book(library):
 #load books
 library = load_books()
 
-st.title("Personal Library Manager")
-st.write("Created by Danish Zohaib")
+st.title("📚 Personal Library Manager")
+st.write("👨‍💻Created by Danish Zohaib")
 
 menu = ["Add Book", "Show All Books", "Search Book", "Delete Book"]
 choice = st.sidebar.selectbox("Menu", menu)
 
 if choice == "Add Book":
-    st.header("Please Add New Book")
+    st.header("➕Please Add New Book")
     title = st.text_input("Please Enter Book Name:")
     author = st.text_input("Please Enter Author Name:")
     year = st.text_input("Please Enter Year:")
@@ -37,7 +38,7 @@ if choice == "Add Book":
         book = {"title":title, "author":author, "year":year}
         library.append(book)
         save_book(library)
-        st.success("Book has been saved successfully")
+        st.success("💾Book has been saved successfully")
         
 elif choice == "Show All Books":
     st.subheader("All books in my library")
@@ -45,10 +46,10 @@ elif choice == "Show All Books":
         for i, book in enumerate(library):
             st.write(f"{i+1}. **{book['title']}** - {book['author']} ({book['year']})")
     else:
-        st.info("There is no book saved in library")
+        st.info("❌There is no book saved in library")
         
 elif choice == "Search Book":
-    st.subheader("Find a book here.")
+    st.subheader("🔎Find a book here.")
     search_title = st.text_input("Please Enter Book Name:")
     if st.button("Search"):
         found = False
@@ -61,7 +62,7 @@ elif choice == "Search Book":
             st.error("Book not found in library")
             
 elif choice == "Delete Book":
-    st.subheader("Book you want to delete from library")
+    st.subheader("📕Book you want to delete from library")
     delete_title = st.text_input("Enter Book Name:")
     if st.button("Delete Book"):
         for book in library:
